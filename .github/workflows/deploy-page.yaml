@@ -1,0 +1,37 @@
+name: gh pages deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+      - name: Install Clojure
+        run: apt install clojure leiningen
+      - name: Build site
+        run: lein run
+      - name: Upload site
+        id: upload
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: /home/runner/work/nublog/nublog/_build
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.upload.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
