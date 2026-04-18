@@ -13,7 +13,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
       - name: Install Clojure
-        run: apt install clojure leiningen
+        run: sudo apt install clojure leiningen
       - name: Build site
         run: lein run
       - name: Upload site
