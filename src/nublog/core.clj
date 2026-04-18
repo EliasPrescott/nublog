@@ -43,6 +43,7 @@
   [title body]
   [:html
    [:head
+    [:title (str title " | " site-title)]
     [:link {:rel "stylesheet"
             :href "/static/missing.min.css"}]]
    [:body
@@ -158,24 +159,25 @@ end"]]
   [& args]
   `(assert (= 0 (:exit (clojure.java.shell/sh ~@args)))))
 
-(defn -main
-  [& args]
+(defn build-site
+  []
   (sh "rm" "-rf" "_build/")
   (.mkdirs (io/file "_build"))
-  (println "Copying static directory")
   (sh "cp" "-R" "static/" "_build/static")
-  (println "Building home page")
   (spit "_build/index.html" (str (h/html home-page)))
-  (println "Building post pages")
-  (for [post posts]
-    (do
-      (.mkdirs (io/file (str "_build/posts/" (:id post))))
-      (spit (str "_build/posts/" (:id post) "/index.html") (str (h/html (post-page-template post))))))
-  (println "Building tag pages")
-  (for [[tag post-list] posts-by-tag]
-    (do
-      (.mkdirs (io/file (str "_build/tags/" tag)))
-      (spit (str "_build/tags/" tag "/index.html")
-            (str (h/html (tags-page-template tag post-list))))))
-  (println "Done!")
+  (dorun (for [post posts
+               :let [dir (io/file "_build/posts" (:id post))]]
+           (do
+             (.mkdirs dir)
+             (spit (io/file dir "index.html") (str (h/html (post-page-template post)))))))
+  (dorun (for [[tag post-list] posts-by-tag
+               :let [dir (io/file "_build/tags" (str tag))]]
+           (do
+             (.mkdirs dir)
+             (spit (io/file dir "index.html")
+                   (str (h/html (tags-page-template tag post-list))))))))
+
+(defn -main
+  [& args]
+  (build-site)
   (shutdown-agents))
