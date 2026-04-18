@@ -44,6 +44,8 @@
   [:html
    [:head
     [:title (str title " | " site-title)]
+    [:meta {:name "viewport"
+            :content "width=device-width"}]
     [:link {:rel "stylesheet"
             :href "/static/missing.min.css"}]]
    [:body
