@@ -143,7 +143,48 @@ end"]]
              "here"]
             " or you can try playing it in the iframe below."]
            [:p [:iframe {:src "https://eliasprescott.github.io/godot-demo/"
-                         :style "width: 100%; aspect-ratio: 1 / 1.5; max-height: 90vh;"}]]]}])
+                         :style "width: 100%; aspect-ratio: 1 / 1.5; max-height: 90vh;"}]]]}
+   {:id "digital-handyman"
+    :title "Digital Handyman"
+    :icon 'hammer
+    :author elias-prescott
+    :tags #{'programming-philosophy}
+    :created (jt/local-date 2026 04 22)
+    :body [[:p
+            "I have heard it said that programmers are not really engineers. "
+            "Instead, we are digital plumbers, connecting programs and APIs like we are hooking up pipes and fixing leaks when they occur. "
+            "I like the analogy, but after thinking over my experiences so far, I would say I'm more of a digital handyman."]
+           [:p
+            "Throughout my (relatively short) time as a programmer, I have worked on a wide variety of projects. "
+            "I have worked on: "
+            [:ul
+             [:li "internal web apps"]
+             [:li "marketing and apartment leasing websites"]
+             [:li "redesigning an e-commerce site"]
+             [:li "writing automated tests for web apps, desktop apps, and data APIs"]
+             [:li "setting up and administrating on-premise CI/CD systems (Jenkins)"]
+             [:li "managing cloud CI/CD pipelines (GCP and Terraform)"]
+             [:li "developing SQL reports for data analytics and application use"]
+             [:li "and currently, refactoring a legacy double-entry bookkeeping system"]]]
+           [:p
+            "To my knowledge, I've never said no to a project. "
+            "I have been eager to take on any task assigned to me, even when it's something unfamiliar. "
+            "And I want to stress that almost every single one of those projects I listed was unfamiliar to me when I started it. "
+            "There were many times where things weren't working out and I felt uncomfortable. "
+            "I didn't know what the right solution was and it made me feel like I wasn't good enough."]
+           [:p
+            "The times where I feel uncomfortable and inadequate have always been the greatest periods of growth in my career, because those are the times where I am pushing myself and learning something new. "
+            "We all want some level of comfort in our lives, but if everything is always comfortable, then you will never learn anything new."]
+           [:p
+            "Pushing myself has not only helped me grow, but it has also benefited my employers. "
+            "When you are on a small team, there is no room for specialization. "
+            "If you aren't willing to step out of your comfort zone to take on a project, then there's a good chance it won't get done."]
+           [:p
+            "So, I would say I am proud to be a 'digital handyman,' because it means I am willing to do whatever it takes to get the job done. "
+            "I never know what the future holds, but I have always enjoyed my work. "
+            "Ultimately, my work is not about making great software. "
+            "It is about improving the lives of my coworkers and my customers. "
+            "Software is just a tool that I use to achieve that goal."]]}])
 
 (s/def :post/id string?)
 (s/def :post/title string?)
