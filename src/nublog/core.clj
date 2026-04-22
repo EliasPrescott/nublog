@@ -15,6 +15,13 @@
       slurp
       h/raw))
 
+(defn quotation
+  [body caption]
+  [:figure
+   [:blockquote body]
+   [:figcaption
+    [:cite caption]]])
+
 (defn breadcrumbs
   [links]
   (let [formatted-links (vec (map (fn [[href text]]
@@ -29,11 +36,21 @@
   [p]
   (str "/posts/" (:id p)))
 
+(defn resource->url
+  [r]
+  (str "/resources/" (:id r)))
+
 (defn post->link
   [p]
   [:a {:href (post->url p)}
    (icon (:icon p))
    (:title p)])
+
+(defn resource->link
+  [r]
+  [:a {:href (resource->url r)}
+   (icon (:icon r))
+   (:title r)])
 
 (defn tag->url
   [t]
@@ -47,7 +64,12 @@
     [:meta {:name "viewport"
             :content "width=device-width"}]
     [:link {:rel "stylesheet"
-            :href "/static/missing.min.css"}]]
+            :href "/static/missing.min.css"}]
+    [:link {:rel "stylesheet"
+            :href "/static/styles.css"}]
+    [:link {:rel "icon"
+            :href "/favicon.svg"
+            :type "image/svg+xml"}]]
    [:body
     [:header
      [:h1 [:a {:href "/"} site-title]]
@@ -95,6 +117,67 @@
      `[:ul ~@(map (fn [post]
                     [:li (post->link post)])
                   post-list)]]))
+
+(defn resources-page-template
+  [resource]
+  (let [title (str (:title resource) " Resources")]
+    (base-template title
+      [(breadcrumbs
+         [["/" "Home"]
+          [(resource->url resource) (str "Resources: " (:title resource))]])
+       [:h1 title]
+       [:sub "Last updated " [:time (:last-updated resource)]]
+       [:p
+        "This is a collection of resources on the topic of " (:id resource)". "
+        "I will continually update this page as I find more resources that I like."]
+       [:hr]
+       (seq (:body resource))])))
+
+(def resources
+  [{:id "programming"
+    :title "Programming"
+    :icon 'binary
+    :last-updated (jt/local-date 2026 04 22)
+    :body
+    [[:h2 "Software Design"]
+     [:h3 "Videos"]
+     [:ul
+      [:li [:a {:href "https://youtu.be/SxdOUGdseq4"}
+            "Simple Made Easy - Rich Hickey (2011)"]]]
+     [:h3 "Essays"]
+     [:ul
+      [:li [:a {:href "https://htmx.org/essays/codin-dirty"}
+            "Codin \"Dirty\" - Carson Gross (2024)"]]
+      [:li [:a {:href "https://grugbrain.dev"}
+            "Grug Brain Developer - Carson Gross (2022)"]]
+      [:li [:a {:href "https://caseymuratori.com/blog_0015"}
+            "Semantic Compression - Casey Muratori (2014)"]]]
+
+     [:h3 "Books"]
+     [:ul
+      [:li "A Philosophy of Software Design - John Ousterhout (2018)"]
+      [:li "The Mythical Man Month - Fred Brooks (1975)"]
+      [:li [:a {:href "https://aosabook.org/en/"} "The Architecture of Open Source Applications - Edited by Amy Brown & Greg Wilson"]]]
+
+     [:h2 "Quotes"]
+
+     [:h3 "On Complexity"]
+
+
+     (quotation
+      "The competent programmer is fully aware of the strictly limited size of his own skull; therefore he approaches the programming task in full humility, and among other things he avoids clever tricks like the plague."
+      [:a {:href "https://en.wikiquote.org/wiki/Edsger_W._Dijkstra"}
+       "Edsger Dijkstra"])
+
+     (quotation
+      "Simplicity is prerequisite for reliability."
+      [:a {:href "https://en.wikiquote.org/wiki/Edsger_W._Dijkstra"}
+       "Edsger Dijkstra"])
+
+     (quotation
+      "There are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies. The first method is far more difficult."
+      [:a {:href "https://en.wikiquote.org/wiki/C._A._R._Hoare"}
+       "Tony Hoare"])]}])
 
 (def posts
   [{:id "hyperscript-lichess-tv"
@@ -211,6 +294,11 @@ end"]]
   (base-template
     "Home Page"
     [[:p "Hi! My name is Elias Prescott. I like to learn things and sometimes write about them."]
+
+     [:h2 "Resources"]
+     [:ul (map (fn [resource] [:li (resource->link resource)])
+               resources)]
+
      [:h2 "All posts"]
      [:ul (map (fn [p] [:li (post->link p)])
                posts-newest-first)]
@@ -232,6 +320,12 @@ end"]]
   (.mkdirs (io/file "_build"))
   (sh "cp" "-R" "static/" "_build/static")
   (spit "_build/index.html" (str (h/html home-page)))
+  (spit "_build/favicon.svg" (slurp "icons/favicon.svg"))
+  (dorun (for [resource resources
+               :let [dir (io/file "_build/resources" (:id resource))]]
+           (do
+             (.mkdirs dir)
+             (spit (io/file dir "index.html") (str (h/html (resources-page-template resource)))))))
   (dorun (for [post posts
                :let [dir (io/file "_build/posts" (:id post))]]
            (do
