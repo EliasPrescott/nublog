@@ -121,7 +121,29 @@
     send fen(update: parseChunk(x)) to #board
   end
 end"]]
-           [:p "Maybe it's not practical for everyday use, but it does feel nice to write..."]]}])
+           [:p "Maybe it's not practical for everyday use, but it does feel nice to write..."]]}
+   {:id "godot-virtual-joystick"
+    :title "Godot Virtual Joystick"
+    :icon 'joystick
+    :author elias-prescott
+    :tags #{'godot}
+    :created (jt/local-date 2026 04 22)
+    :body [[:p "Godot version " [:code "4.7 Dev 1"] " introduced a new UI node: the "
+            [:a {:href "https://godotengine.org/article/dev-snapshot-godot-4-7-dev-1/#input-virtualjoystick"} "Virtual Joystick."]]
+           [:p "The virtual joystick automatically handles touch input exactly the way you would expect, and it translates joystick movements into "
+            "any arbitrary input actions that you specify. "
+            "This makes it trivial to slap on a virtual joystick and hook it up to your existing movement input actions. "]
+           [:p
+            "I was able to add a virtual joystick to the "
+            [:a {:href "https://docs.godotengine.org/en/stable/getting_started/first_2d_game/index.html"}
+             "2D intro tutorial"]
+            " with very little effort. "
+            "If you want to try it out, you can play it "
+            [:a {:href "https://eliasprescott.github.io/godot-demo/"}
+             "here"]
+            " or you can try playing it in the iframe below."]
+           [:p [:iframe {:src "https://eliasprescott.github.io/godot-demo/"
+                         :style "width: 100%; aspect-ratio: 1 / 1.5; max-height: 90vh;"}]]]}])
 
 (s/def :post/id string?)
 (s/def :post/title string?)
@@ -131,6 +153,8 @@ end"]]
 (s/def :post/created jt/local-date?)
 (s/def :post/icon symbol?)
 (s/def :blog/post (s/keys :req-un [:post/id :post/title :post/author :post/created :post/tags :post/body :post/icon]))
+
+(def posts-newest-first (reverse (sort-by :created posts)))
 
 (def all-tags
   (reduce clojure.set/union (map :tags posts)))
@@ -148,7 +172,7 @@ end"]]
     [[:p "Hi! My name is Elias Prescott. I like to learn things and sometimes write about them."]
      [:h2 "All posts"]
      [:ul (map (fn [p] [:li (post->link p)])
-               posts)]
+               posts-newest-first)]
 
      [:h2 "Posts by tag"]
      `[:ul
