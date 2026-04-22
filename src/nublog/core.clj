@@ -198,7 +198,7 @@ end"]]
 (def posts-newest-first (reverse (sort-by :created posts)))
 
 (def all-tags
-  (reduce clojure.set/union (map :tags posts)))
+  (sort (reduce clojure.set/union (map :tags posts))))
 
 (def posts-by-tag
   (->> all-tags
