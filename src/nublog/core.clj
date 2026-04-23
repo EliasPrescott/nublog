@@ -143,7 +143,38 @@
     :icon 'binary
     :last-updated (jt/local-date 2026 04 22)
     :body
-    [[:h2 "Software Design"]
+    [[:h2 "Documentation Shortcuts"]
+     [:ul
+      [:li [:a {:href "https://www.gnu.org/software/bash/manual/"}
+            "GNU Bash"]
+       [:ul
+        [:li [:a {:href "https://www.gnu.org/software/bash/manual/bash.html#Looping-Constructs"}
+              "Looping Constructs"]]
+        [:li [:a {:href "https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion"}
+              "Shell Parameter Expansion"]]]]
+      [:li [:a {:href "https://www.postgresql.org/docs/"}
+            "Postgres"]
+       [:ul
+        [:li [:a {:href "https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS"}
+              "Window Function Calls"]]
+        [:li [:a {:href "https://www.postgresql.org/docs/current/functions-json.html"}
+              "JSON Functions and Operators"]]
+        [:li [:a {:href "https://www.postgresql.org/docs/current/plpgsql.html"}
+              "PL/pgSQL - SQL Procedural Language"]]
+        [:li [:a {:href "https://wiki.postgresql.org/wiki/Main_Page"}
+              "Postgres Wiki"]
+         [:ul
+          [:li [:a {:href "https://wiki.postgresql.org/wiki/Don%27t_Do_This"}
+                "Don't Do This (Common Postgres Mistakes)"]]]]
+        [:li [:a {:href "https://www.postgresql.org/docs/current/app-psql.html"}
+              "psql (PostgreSQL interactive terminal)"]]]]
+      [:li [:a {:href "https://odin-lang.org/docs/overview/"}
+            "Odin (the programming language)"]
+       [:ul
+        [:li [:a {:href "https://odin-lang.org/docs/overview/#string-type-conversions"}
+              [:code "string"] " type conversions"]]]]]
+
+     [:h2 "Software Design"]
      [:h3 "Videos"]
      [:ul
       [:li [:a {:href "https://youtu.be/SxdOUGdseq4"}
