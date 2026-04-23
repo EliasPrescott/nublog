@@ -81,11 +81,15 @@
       ]]
     (vec (cons :main body))
     [:footer
-     "Made with "
-     [:a {:href "https://clojure.org"} "Clojure"]
-     " and "
-     [:a {:href "https://missing.style"} "missing.css"]
-     "."]]])
+     [:p
+       "Made with "
+       [:a {:href "https://clojure.org"} "Clojure"]
+       " and "
+       [:a {:href "https://missing.style"} "missing.css"]
+       "."]
+     [:div.flex-row.crowded
+      [:img {:src "/static/neovim.gif"}]
+      [:img {:src "/static/dark-mode.gif"}]]]]])
 
 (defn post-page-template
   [post]
