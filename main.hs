@@ -6,7 +6,6 @@ import Data.Text qualified as T
 import Data.String (fromString)
 import Data.Map (Map, empty)
 import Data.Map qualified as M
-import qualified Data.Map as M
 import Data.List qualified as L
 import Data.Set (Set)
 import Data.Set qualified as Set
@@ -202,8 +201,6 @@ posts = [
 postsByDate = L.sortBy (\x y -> compare y.created x.created) posts
 
 tags = L.nub $ L.concatMap (\x -> Set.toList x.tags) posts
--- TODO: add links to tag pages on the home page
--- TODO: compile tagged post pages
 postsByTag = M.fromList $ L.map (\tag -> (tag, L.filter (\post -> Set.member tag post.tags) posts)) tags
 
 newtype LinkTree = LinkT (Text, Maybe Text, [LinkTree])
