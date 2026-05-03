@@ -266,7 +266,8 @@ resources = [
       ul [] [
         li [] [a [("href", "https://htmx.org/essays/codin-dirty")] [Text "Codin' Dirty - Carson Gross (2024)"]],
         li [] [a [("href", "https://grugbrain.dev")] [Text "Grug Brain Developer - Carson Gross (2022)"]],
-        li [] [a [("href", "https://caseymuratori.com/blog_0015")] [Text "Semantic Compression - Casey Muratori (2014)"]]
+        li [] [a [("href", "https://caseymuratori.com/blog_0015")] [Text "Semantic Compression - Casey Muratori (2014)"]],
+        li [] [a [("href", "https://www.gingerbill.org/article/2020/05/31/programming-pragmatist-proverbs/")] [Text "Pragmatism in Programming Proverbs - Ginger Bill (2020)"]]
       ],
       h3 [] [Text "Books"],
       ul [] [
