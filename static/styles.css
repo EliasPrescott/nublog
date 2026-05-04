@@ -6,3 +6,9 @@ a {
 li > ul {
   margin-block: calc(var(--gap) / 4);
 }
+
+.presentation {
+  ul, li {
+    margin-block: calc(var(--gap)) !important;
+  }
+}

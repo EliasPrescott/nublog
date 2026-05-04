@@ -64,6 +64,7 @@ header = Element False "header"
 sub = Element False "sub"
 time = Element False "time"
 br = Element True "br" [] []
+hr = Element True "hr" [] []
 h1 = Element False "h1"
 h2 = Element False "h2"
 h3 = Element False "h3"
@@ -139,6 +140,187 @@ resourceLink r = do
 
 posts :: [Post]
 posts = [
+  Post {
+    id = "professional-programmer-talk",
+    title = "Being a Professional Programmer",
+    icon = "user",
+    author = eliasPrescott,
+    tags = ["programming"],
+    created = fromGregorian 2026 5 4,
+    body = [
+      p [] [
+        Text "These are notes for a presentation I am giving on being a professional programmer. ",
+        Text "I have tweaked the spacing of some elements for ease of reading on a whiteboard."
+      ],
+      h2 [] [Text "Soft Skills"],
+      div [("class", "presentation")] [
+        ul [] [
+          li [] [
+            Text "Caring for people",
+            ul [] [
+              li [] [Text "Every job is people-oriented. All work ultimately is about serving people."],
+              li [] [Text "Showing people that you care about them is one of the most important things you can do in work or life in general."]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Attention to detail",
+            ul [] [
+              li [] [Text "Attention to detail is \"the act or state of applying the mind to something.\""],
+              li [] [
+                Text "Practical applications:",
+                ul [] [
+                  li [] [Text "Active concentration on work."],
+                  li [] [Text "Good note-taking (Lookup \"zettlekasten\". Look into tools like Obsidian or LoqSeq.)"],
+                  li [] [Text "Studying the problem domain or documentation (more on this later)."]
+                ]
+              ]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Connecting with people through small talk or humor",
+            ul [] [
+              li [] [Text "Not easy for most programmers, but it's important for any job."],
+              li [] [Text "Second to caring, this is the best way to get people to open up."]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Good writing skills",
+            ul [] [
+              li [] [Text "Lots of communication happens through writing (email, messages, technical documentation)."],
+              li [] [Text "\"Besides a mathematical inclination, an exceptionally good mastery of one's native tongue is the most vital asset of a competent programmer.\" - Edsger Dijkstra"]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Passion for the work",
+            ul [] [
+              li [] [Text "This has been one of the best skills for my career."],
+              li [] [Text "This skill motivates me to develop all the other skills."]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Ability to learn new things",
+            ul [] [
+              li [] [Text "IT as an industry changes incredibly quickly."],
+              li [] [Text "There will always be new technologies to evaluate and learn, but very few of them are worth learning."]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Good reading comprehension",
+            ul [] [
+              li [] [Text "As a programmer, I read a ton of technical content (articles, code, documentation) each week."],
+              li [] [Text "Skimming is a valuable skill."],
+              li [] [Text "Read to get a general overview, and then come back whenever you have a specific need."]
+            ]
+          ]
+        ],
+
+        hr,
+
+        h2 [] [Text "Other Topics"],
+        ul [] [
+          li [] [
+            Text "Web Development",
+            ul [] [
+              li [] [Text "Web development was my entry into the industry (I got a part-time job in it in college)."],
+              li [] [Text "It is probably the easiest way to enter the industry because some web dev jobs have a low barrier to entry."],
+              li [] [Text "You can specialize in frontend or backend only, but I prefer full-stack."],
+              li [] [Text "Don't focus on frameworks, focus on the medium: HTML, CSS, JavaScript, SQL."],
+              li [] [Text "But, also learn some popular frameworks because they are useful and good for your resume."]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Becoming a subject matter expert",
+            ul [] [
+              li [] [Text "Working as a programmer is rarely just about programming."],
+              li [] [Text "As a programmer, you are in a unique position to learn and leverage business knowledge."],
+              li [] [Text "Understanding how the business works can inform lots of technical decisions."],
+              li [] [Text "It also helps you comprehend and work with the business' data."],
+              li [] [Text "Being a good learner is essential here. I have recently been learning a lot about accounting because I am working on our app's accounting features."]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Being a Specialist vs a Generalist",
+            ul [] [
+              li [] [Text "IT is such a large field. Specializing in a specific area can help you focus on mastering a smaller subset of skills."],
+              li [] [Text "Large companies have a need for specialists, but smaller companies typically want generalists."],
+              li [] [Text "I would recommend being a generalist unless someone is paying you to specialize."],
+              li [] [Text "I have learned so much from being open to new tasks or responsibilities. Being a generalist lets me constantly work on new domains or new types of problems."],
+              li [] [Text "The hardest problems cross multiple layers of an application (frontend, backend, database, etc.), so being a generalist and having holistic knowledge puts you in the best position to solve difficult problems."]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Development Workflow",
+            ul [] [
+              li [] [Text "Knowing your tools can be a huge boost to productivity and makes work more fun."],
+              li [] [Text "I like using a non-standard editor (NeoVim), but learning some advanced shortcuts will make your experience better with any editor."],
+              li [] [Text "This ties in with the Unix philosophy where text-based tools start to compose, so your knowledge of different tools can compound."],
+              li [] [Text "Learning common unix/posix terminal utilities can be a big productivity boost."],
+              li [] [Text "Learning a little Bash (the shell & the scripting language) goes a long way. If you are on Windows, you can still use Git Bash for a similar experience."],
+              li [] [
+                Text "The easiest wins:",
+                ul [] [
+                  li [] [Text "Shortcuts to run/build your project."],
+                  li [] [Text "Find a way to visually surface errors without tons of context switching (terminal or an in-editor LSP)."],
+                  li [] [Text "Shortcuts to switch between windows (lookup \"tiling window managers\" to get an idea)."],
+                  li [] [Text "If you are in web development, learn to use the browser's DevTools! I use the DevTools on almost every bug I triage."],
+                  li [] [Text "Learn Git or your VCS of choice well. Use a visual tool to make Git easier (lazygit, magit, or whatever VSCode plugin is popular these days)."]
+                ]
+              ]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Functional Programming",
+            ul [] [
+              li [] [Text "Functional programming is an alternative paradigm to object-oriented programming (OOP)."],
+              li [] [Text "Neither paradigm is the be-all and end-all, but learning both is beneficial."],
+              li [] [
+                Text "Generally, functional programming includes:",
+                ul [] [
+                  li [] [Text "separating data from behavior,"],
+                  li [] [Text "avoiding mutation and restricting side effects,"],
+                  li [] [Text "using algebraic data types (records, discriminated unions),"],
+                  li [] [Text "using recursion over iteration."]
+                ]
+              ],
+              li [] [Text "If you have used C# before, F# is a great introduction to functional programming."],
+              li [] [Text "If you are feeling more adventerous, OCaml and Haskell can be lots of fun, but their tooling and ecosystems have some rough edges."]
+            ]
+          ],
+          br,
+          br,
+          li [] [
+            Text "Modern Low-Level Programming Languages",
+            ul [] [
+              li [] [Text "I just mentioned F#, OCaml, and Haskell, but there are other languages that I think are worth trying."],
+              li [] [Text "If you are looking for an alternative to C/C++, Odin and Zig are lots of fun."],
+              li [] [Text "I especially love Odin because it's very pragmatic and elegantly designed."],
+              li [] [Text "Odin also comes bundled with some third-party dependencies like Raylib, so making simple games with it is really easy."]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
   Post {
     id = "hyperscript-lichess-tv",
     title = "Making a Lichess TV Viewer with Hyperscript",
